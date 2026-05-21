@@ -28,7 +28,7 @@ def fetch_google_results(search_term):
     }
 
     data = {
-        "zone": "serp_api8",
+        "zone": "serp_api1",
         "url": "https://www.google.com/search?q="+urllib.parse.quote(search_term),
         "format": "raw"
     }
