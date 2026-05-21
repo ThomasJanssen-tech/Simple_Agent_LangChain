@@ -34,9 +34,11 @@ pip install -r requirements.txt
 ```
 
 <h3>5. Add OpenAI and Bright Data API Key</h3>
-Rename the .env.example file to .env
-Add your OpenAI API Key
-Add your Bright Data API Key
+Rename the .env.example file to .env<br>
+Add your OpenAI API Key<br>
+<br>
+Get your (100% free) Bright Data API Key here: https://brdta.com/tomstechacademy<br>
+Add your Bright Data API Key<br>
 
 <h2>Executing the scripts</h2>
 

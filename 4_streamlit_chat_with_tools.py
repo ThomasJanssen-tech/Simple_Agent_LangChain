@@ -16,7 +16,6 @@ load_dotenv()
 # initialize tools
 
 @tool
-
 def google_search(query):
     """Search by using the Google search engine
 
@@ -46,7 +45,7 @@ def google_search(query):
     soup = BeautifulSoup(response.text, "html.parser")
     text = soup.get_text()
 
-    print(text)
+    #print(text)
 
     return text
 
