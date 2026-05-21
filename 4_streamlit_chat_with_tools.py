@@ -59,7 +59,7 @@ model = init_chat_model(model="gpt-5-nano")
 # initializing agent
 agent = create_agent(
     model=model,
-    system_prompt="You are a helpful assistant. You have access to the tool fetch_google_results to search on Google",
+    system_prompt="You are a helpful assistant. You have access to the tool google_search() to search on Google",
     tools=[google_search]
 )
 
