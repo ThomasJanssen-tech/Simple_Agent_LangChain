@@ -8,6 +8,7 @@ import streamlit as st
 import requests
 import os
 import urllib.parse
+from bs4 import BeautifulSoup
 
 load_dotenv()
 
@@ -15,23 +16,26 @@ load_dotenv()
 # initialize tools
 
 @tool
-def fetch_google_results(search_term):
+
+def google_search(query):
     """Search by using the Google search engine
 
     Args:
-        search_term: Search terms to look for
+        query: Search terms to look for
     """
+
+    print("start search tool")
 
     headers = {
         "Authorization": "Bearer "+os.getenv("BRIGHTDATA_API_KEY"),
         "Content-Type": "application/json"
     }
-
     data = {
-        "zone": "serp_api1",
-        "url": "https://www.google.com/search?q="+urllib.parse.quote(search_term),
-        "format": "raw"
+        "zone": os.getenv("BRIGHTDATA_SERP_ZONE"),
+        "url": "https://www.google.com/search?q="+urllib.parse.quote(query),
+        "format": "json"
     }
+
 
     response = requests.post(
         "https://api.brightdata.com/request",
@@ -39,9 +43,14 @@ def fetch_google_results(search_term):
         headers=headers
     )
 
-    #print(response.text)
+    soup = BeautifulSoup(response.text, "html.parser")
+    text = soup.get_text()
 
-    return response.text
+    print(text)
+
+    return text
+
+
 
 
 # initializing model
@@ -51,7 +60,7 @@ model = init_chat_model(model="gpt-5-nano")
 agent = create_agent(
     model=model,
     system_prompt="You are a helpful assistant. You have access to the tool fetch_google_results to search on Google",
-    tools=[fetch_google_results]
+    tools=[google_search]
 )
 
 # initiate streamlit app
